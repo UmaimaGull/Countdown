@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Countdown</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #fff8e1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #f57c00;
+            text-align: center;
+        }
+
+        #countdown {
+            font-size: 60px;
+            font-weight: bold;
+            color: #ff7043;
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 30px;
+            color: #3e2723;
+        }
+    </style>
+</head>
+<body>
+
+<div>
+    <div id="countdown"></div>
+    <div class="message" id="message"></div>
+</div>
+
+<script>
+    // Set the date of your love's birthday (Updated to December 7, 2024)
+    const birthday = new Date("December 7, 2024 00:00:00").getTime();
+
+    // Update the countdown every 1 second
+    const interval = setInterval(function() {
+        // Get the current date and time
+        const now = new Date().getTime();
+
+        // Find the time difference
+        const distance = birthday - now;
+
+        // Time calculations for days, hours, minutes, and seconds
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Display the countdown
+        document.getElementById("countdown").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+        // Display messages when the countdown reaches certain milestones
+        if (distance < 0) {
+            clearInterval(interval);
+            document.getElementById("countdown").innerHTML = "Happy Birthday, my love!";
+            document.getElementById("message").innerHTML = "You’ve made it to another year of awesomeness!";
+        } else if (distance < 86400000) { // Less than 1 day
+            document.getElementById("message").innerHTML = "It's almost time... 1 more day!";
+        } else if (distance < 172800000) { // Less than 2 days
+            document.getElementById("message").innerHTML = "The countdown is on... 2 days to go!";
+        }
+    }, 1000);
+</script>
+
+</body>
+</html>
